@@ -1,0 +1,52 @@
+{% extends "header.html" %}
+
+{% block content %} 
+   
+<style>
+    body,
+		html {
+			margin: 0;
+			padding: 0;
+			height: 100%;
+			background: #807f81 !important;
+		}
+   .header-txt {
+      align-items: center;
+      color: #f8f9fa;
+      size: 5px;
+    }
+</style>
+<div class="pos-f-t">
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'userprofile:home' %}">Home</a>
+        </li>
+        {% if user.is_staff %}
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'dashboard:attendance' %}">Add Attendance</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'dashboard:marks' %}">Add Marks</a>
+        </li>
+        {% endif %}
+      </ul>
+    </div>
+    <div>
+      <span class="header-txt">Welcome, {{user.username}}</span>
+      <span ><a class="header-txt" href="{% url 'userprofile:logout' %}">  Logout</a></span>
+    </div>
+  </nav>
+
+  <div class="header-txt"><p>Last login: {{ request.session.last_login}}</p> </div>
+  
+  </div>
+
+{% endblock %}    
